@@ -164,6 +164,8 @@ endif
 
 let g:puppet_align_hashes = 0
 
+let g:auto_save = 1
+
 " ========= Shortcuts ========
 
 " NERDTree
