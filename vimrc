@@ -194,7 +194,6 @@ map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
 vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
-
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
 
 map <silent> <LocalLeader>cj :!clj %<CR>
@@ -218,6 +217,10 @@ map <silent> <LocalLeader>pp :set paste!<CR>
 
 " Pasting over a selection does not replace the clipboard
 xnoremap <expr> p 'pgv"'.v:register.'y'
+
+" Copy text to Mac OS X clipboard
+map <C-x> :!pbcopy<CR>
+map <C-c> :w !pbcopy<CR><CR>
 
 " ========= Insert Shortcuts ========
 
