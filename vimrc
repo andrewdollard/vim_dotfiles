@@ -37,6 +37,8 @@ set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git
 set tags+=gems.tags
 set mouse=
+set columns=80
+set linebreak
 
 if version >= 703
   set undodir=~/.vim/undodir
