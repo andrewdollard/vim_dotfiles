@@ -37,7 +37,7 @@ set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git
 set tags+=gems.tags
 set mouse=
-set columns=80
+" set columns=80
 set linebreak
 
 if version >= 703
@@ -135,7 +135,6 @@ let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
-
 
 let g:no_html_toolbar = 'yes'
 
