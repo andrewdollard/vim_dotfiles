@@ -48,7 +48,7 @@ Plug 'google/vim-jsonnet'
 Plug 'ddrscott/vim-side-search'
 Plug 'Townk/vim-autoclose'
 Plug '907th/vim-auto-save'
-Plug 'posva/vim-vue'
+Plug 'mxw/vim-jsx'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
