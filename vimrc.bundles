@@ -49,6 +49,7 @@ Plug 'ddrscott/vim-side-search'
 Plug 'Townk/vim-autoclose'
 Plug '907th/vim-auto-save'
 Plug 'mxw/vim-jsx'
+Plug 'ap/vim-css-color'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
