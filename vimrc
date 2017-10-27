@@ -34,11 +34,15 @@ set dir=/tmp//
 set scrolloff=5
 set ignorecase
 set smartcase
-set wildignore+=*.pyc,*.o,*.class,*.lo,.git
+set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*,node_modules/**,bower_components/**,*/build_gradle/*,*/build_intellij/*,*/build/*,*/cassandra_data/*
 set tags+=gems.tags
 set mouse=
 " set columns=80
 set linebreak
+set ttymouse=
+set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
+set signcolumn=yes
+set complete-=t " Don't use tags for autocomplete
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -49,10 +53,6 @@ set undolevels=1000 "maximum number of changes that can be undone
 
 " Color
 colorscheme vibrantink
-
-au FileType diff colorscheme desert
-au FileType git colorscheme desert
-au BufWinLeave * colorscheme vibrantink
 
 augroup markdown
   au!
@@ -85,9 +85,6 @@ endif
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 
-" Autoremove trailing spaces when saving the buffer
-autocmd FileType c,cpp,elixir,eruby,html,java,javascript,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
-
 " Highlight too-long lines
 autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
 highlight LineLengthError ctermbg=black guibg=black
@@ -96,6 +93,9 @@ autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 " Set up highlight group & retain through colorscheme changes
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" Run terraform fmt on terraform files
+autocmd BufWritePre *.tf call terraform#fmt()
 
 " Status
 set laststatus=2
@@ -127,6 +127,14 @@ nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
  command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 " }}}
 
+let g:ale_enabled = 0                     " Disable linting by default
+let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
+let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
+
+let g:ale_linters = {
+\   'java': []
+\ }
+
 let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
@@ -135,6 +143,7 @@ let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
 let g:rubycomplete_buffer_loading = 1
+let g:ruby_indent_assignment_style = 'variable'
 
 let g:no_html_toolbar = 'yes'
 
@@ -147,14 +156,14 @@ let g:netrw_banner = 0
 
 let g:VimuxUseNearestPane = 1
 
-let g:CommandTMaxHeight = 15
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
-let g:CommandTWildIgnore=&wildignore . ",vendor/*,node_modules/**,bower_components/**"
-
-let g:vim_markdown_folding_disabled=1
+let g:rails_projections = {
+      \   "script/*.rb": { 
+      \     "test": "spec/script/{}_spec.rb"
+      \   },
+      \   "spec/script/*_spec.rb": {
+      \     "alternate": "script/{}.rb"
+      \   }
+      \ }
 
 if exists(':RainbowParenthesesToggle')
   autocmd VimEnter *       RainbowParenthesesToggle
@@ -167,6 +176,22 @@ let g:puppet_align_hashes = 0
 
 let g:auto_save = 1
 
+let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps/|_build/|node_modules/|vendor/|build_intellij/"' 
+let $FZF_DEFAULT_OPTS = '--reverse'
+let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:vim_markdown_folding_disabled = 1
+
+let g:go_fmt_command = "goimports"
+let g:go_highlight_trailing_whitespace_error = 0
+
+let g:completor_auto_trigger = 0
+
 " ========= Shortcuts ========
 
 " NERDTree
@@ -174,10 +199,13 @@ map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
-" CommandT
-map <silent> <leader>ff :CommandT<CR>
-map <silent> <leader>fb :CommandTBuffer<CR>
-map <silent> <leader>fr :CommandTFlush<CR>
+" FZF
+map <silent> <leader>ff :Files<CR>
+map <silent> <leader>fg :GFiles<CR>
+map <silent> <leader>fb :Buffers<CR>
+map <silent> <leader>ft :Tags<CR>
+
+map <silent> <C-p> :Files<CR>
 
 " Ack
 map <LocalLeader>aw :Ack '<C-R><C-W>'
@@ -335,6 +363,10 @@ function MyTabLabel(n)
 endfunction
 
 set tabline=%!MyTabLine()
+
+" ========= Aliases ========
+
+command! W w
 
 "-------- Local Overrides
 ""If you have options you'd like to override locally for

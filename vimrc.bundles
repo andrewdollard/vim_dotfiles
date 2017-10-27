@@ -8,49 +8,74 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104325c3' }
-Plug 'mileszs/ack.vim'
-Plug 'vim-scripts/Align'
+Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
-Plug 'braintreeps/command-t', { 'do': 'rake make' }
-Plug 'mattn/emmet-vim'
-Plug 'henrik/vim-indexed-search'
-Plug 'vim-scripts/mako.vim'
+" Plug 'braintreeps/command-t', { 'do': 'rake make' }
+Plug 'chase/vim-ansible-yaml'
+Plug 'davidzchen/vim-bazel'
+Plug 'ddrscott/vim-side-search'
+Plug 'derekwyatt/vim-scala'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'elubow/cql-vim'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
-Plug 'vim-scripts/matchit.zip'
-Plug 'scrooloose/nerdtree'
-Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487fa2' }
-Plug 'tomtom/tcomment_vim'
+Plug 'google/vim-jsonnet'
+Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-clojure-static'
+Plug 'henrik/vim-indexed-search'
+Plug 'jergason/scala.vim'
+Plug 'jgdavey/vim-turbux'
+Plug 'hashivim/vim-terraform'
+Plug 'jlanzarotta/bufexplorer', { 'commit': 'f3bbe12664b08038912faac586f6c0b5104325c3' }
+Plug 'jtratner/vim-flavored-markdown'
+if expand('<sfile>') == '/etc/vim/vimrc.bundles'
+  Plug 'junegunn/fzf', { 'tag': '0.16.7', 'dir': '/etc/vim/fzf', 'do': './install --bin' }
+else
+  Plug 'junegunn/fzf', { 'tag': '0.16.7', 'dir': '~/.fzf', 'do': './install --bin' }
+endif
+Plug 'junegunn/fzf.vim', {'commit': '990834ab6cb86961e61c55a8e012eb542ceff10e'}
+Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
-Plug 'benmills/vim-commadown'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'markcornick/vim-bats'
+Plug 'mattn/emmet-vim'
+Plug 'mileszs/ack.vim'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'pangloss/vim-javascript', { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
+Plug 'pgr0ss/vimux-ruby-test'
+Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fireplace'
-Plug 'jtratner/vim-flavored-markdown'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
-Plug 'tfnico/vim-gradle'
-Plug 'pangloss/vim-javascript', { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
-Plug 'vim-ruby/vim-ruby', { 'commit': 'c9f55233d752b8ba69c5f3b28e94304e60f3c45b' }
 Plug 'tpope/vim-surround'
-Plug 'jgdavey/vim-turbux'
-Plug 'benmills/vimux'
-Plug 'pitluga/vimux-nose-test'
-Plug 'pgr0ss/vimux-ruby-test'
 Plug 'tpope/vim-vinegar'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'google/vim-jsonnet'
-Plug 'ddrscott/vim-side-search'
 Plug 'Townk/vim-autoclose'
 Plug '907th/vim-auto-save'
 Plug 'mxw/vim-jsx'
 Plug 'ap/vim-css-color'
+Plug 'tpope/vim-unimpaired'
+Plug 'uarun/vim-protobuf'
+Plug 'vim-ruby/vim-ruby', { 'commit': '074200ffa39b19baf9d9750d399d53d97f21ee07' }
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/VimClojure'
+Plug 'vim-scripts/mako.vim'
+Plug 'vim-scripts/matchit.zip'
+Plug 'voxpupuli/vim-puppet', { 'commit': 'e88c19bf10763b30f86b7417677f59a9c9487fa2' }
 
+if v:version >= 800 || has('nvim')
+  Plug 'w0rp/ale'
+  Plug 'maralla/completor.vim'
+endif
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
