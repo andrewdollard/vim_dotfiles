@@ -1,4 +1,4 @@
 set guioptions-=T  "remove toolbar
 set guioptions-=m  "remove menu
-set mouse=a
+set nospell
 autocmd! GUIEnter * set vb t_vb=
