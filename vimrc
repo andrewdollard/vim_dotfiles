@@ -1,4 +1,6 @@
 " ========= Setup ========
+set ttymouse=xterm2
+set mouse=a
 
 set nocompatible
 
@@ -36,10 +38,8 @@ set ignorecase
 set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*,node_modules/**,bower_components/**,*/build_gradle/*,*/build_intellij/*,*/build/*,*/cassandra_data/*
 set tags+=gems.tags
-set mouse=
 " set columns=80
 set linebreak
-set ttymouse=
 set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
 " set signcolumn=yes
 set complete-=t " Don't use tags for autocomplete
