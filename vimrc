@@ -150,6 +150,7 @@ let coffee_no_trailing_space_error = 1
 
 let NERDTreeIgnore=['\.pyc$', '\.o$', '\.class$', '\.lo$']
 let NERDTreeHijackNetrw = 0
+let NERDTreeCaseSensitiveSort = 1
 
 let g:netrw_banner = 0
 
