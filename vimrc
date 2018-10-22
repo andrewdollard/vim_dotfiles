@@ -246,6 +246,11 @@ map <silent> <LocalLeader>pp :set paste!<CR>
 " Pasting over a selection does not replace the clipboard
 xnoremap <expr> p 'pgv"'.v:register.'y'
 
+" Ctl-S to save
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
+
 " Copy text to Mac OS X clipboard
 map <C-x> :!pbcopy<CR>
 map <C-c> :w !pbcopy<CR><CR>
