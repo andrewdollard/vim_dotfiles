@@ -192,6 +192,8 @@ let g:go_highlight_trailing_whitespace_error = 0
 
 let g:completor_auto_trigger = 0
 
+let vim_markdown_preview_github=1
+
 " ========= Shortcuts ========
 
 " NERDTree
