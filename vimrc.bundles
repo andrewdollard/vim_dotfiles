@@ -76,12 +76,14 @@ Plug 'pangloss/vim-javascript' ", { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f
 Plug 'mxw/vim-jsx'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tmhedberg/SimpylFold'
+Plug 'vim-scripts/pyte'
+
 " Plug 'mzlogin/vim-markdown-toc'
 " Plug 'prashanthellina/follow-markdown-links'
 " Plug 'xolox/vim-colorscheme-switcher'
 " Plug 'flazz/vim-colorschemes'
 " Plug 'felixhummel/setcolors.vim'
-" Plug 'reedes/vim-colors-pencil'
+Plug 'reedes/vim-colors-pencil'
 " Plug 'ajh17/Spacegray.vim'
 
 if v:version >= 800 || has('nvim')
