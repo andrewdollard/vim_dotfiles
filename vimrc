@@ -1,3 +1,5 @@
+colorscheme Tomorrow-Night
+
 " ========= Setup ========
 set ttymouse=xterm2
 set mouse=a
@@ -17,6 +19,8 @@ if filereadable(expand("/etc/vim/vimrc.bundles"))
   source /etc/vim/vimrc.bundles
 endif
 
+" Put yanked values on Mac system clipboard
+set clipboard=unnamed
 
 " ========= Options ========
 
