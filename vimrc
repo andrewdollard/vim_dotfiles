@@ -1,4 +1,3 @@
-colorscheme Tomorrow-Night
 
 " ========= Setup ========
 set ttymouse=xterm2
@@ -24,6 +23,8 @@ set clipboard=unnamed
 
 " ========= Options ========
 
+colorscheme gruvbox
+
 compiler ruby
 syntax on
 set hlsearch
@@ -42,11 +43,13 @@ set ignorecase
 set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git,vendor/*,node_modules/**,bower_components/**,*/build_gradle/*,*/build_intellij/*,*/build/*,*/cassandra_data/*
 set tags+=gems.tags
-" set columns=80
+" set columns=120
 set linebreak
 set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
 " set signcolumn=yes
 set complete-=t " Don't use tags for autocomplete
+set textwidth=80
+:set colorcolumn=-0
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -55,13 +58,7 @@ if version >= 703
 endif
 set undolevels=1000 "maximum number of changes that can be undone
 
-" Color
-colorscheme vibrantink
-
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
+autocmd FileType markdown normal zR
 
 " File Types
 
@@ -82,20 +79,21 @@ autocmd FileType python runtime python_mappings.vim
 " endif
 
 " Highlight trailing whitespace
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
+" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Autoremove trailing spaces when saving the buffer
-autocmd FileType c,cpp,elixir,eruby,html,java,javascript,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,elixir,eruby,html,java,javascript,md,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Highlight too-long lines
-autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
-highlight LineLengthError ctermbg=black guibg=black
-autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
+" autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
+" highlight LineLengthError ctermbg=black guibg=black
+
+" autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
 
 " Set up highlight group & retain through colorscheme changes
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 " Run terraform fmt on terraform files
 autocmd BufWritePre *.tf call terraform#fmt()
@@ -189,14 +187,7 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-let g:vim_markdown_folding_disabled = 1
-
-let g:go_fmt_command = "goimports"
-let g:go_highlight_trailing_whitespace_error = 0
-
 let g:completor_auto_trigger = 0
-
-let vim_markdown_preview_github=1
 
 " ========= Shortcuts ========
 

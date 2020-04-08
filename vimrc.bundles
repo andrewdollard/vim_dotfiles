@@ -9,13 +9,17 @@ Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 Plug 'benmills/vimux'
+
+" Distraction-free writing
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
 
 " Markdown
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
-Plug 'jtratner/vim-flavored-markdown'
-Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'jtratner/vim-flavored-markdown'
 " Plug 'mzlogin/vim-markdown-toc'
 " Plug 'prashanthellina/follow-markdown-links'
 
@@ -26,12 +30,10 @@ Plug 'mxw/vim-jsx'
 Plug 'hashivim/vim-terraform'
 
 " Colors
-Plug 'vim-scripts/pyte'
-Plug 'reedes/vim-colors-pencil'
-" Plug 'xolox/vim-colorscheme-switcher'
-" Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
+Plug 'ajh17/Spacegray.vim'
+Plug 'cormacrelf/vim-colors-github'
 " Plug 'felixhummel/setcolors.vim'
-" Plug 'ajh17/Spacegray.vim'
 
 " Investigate these
 Plug 'benmills/vim-commadown'
@@ -60,9 +62,11 @@ Plug 'Townk/vim-autoclose'
 Plug '907th/vim-auto-save'
 Plug 'tmhedberg/SimpylFold'
 
-if v:version >= 800 || has('nvim')
+if v:version >= 801 || has('nvim')
   Plug 'w0rp/ale'
   Plug 'maralla/completor.vim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+  Plug 'RRethy/vim-illuminate'
 endif
 
 call plug#end()
