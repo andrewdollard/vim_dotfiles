@@ -5,14 +5,33 @@ end
 call plug#begin('~/.vim/plugged')
 
 " Core tools
-Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
+
+Plug 'scrooloose/nerdtree'
+map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
+map <silent> <LocalLeader>nr :NERDTree<CR>
+map <silent> <LocalLeader>nf :NERDTreeFind<CR>
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+map <silent> <leader>ff :Files<CR>
+map <silent> <leader>fg :GFiles<CR>
+map <silent> <leader>fb :Buffers<CR>
+map <silent> <leader>ft :Tags<CR>
+
 Plug 'benmills/vimux'
+map <silent> <LocalLeader>rl :wa<CR> :VimuxRunLastCommand<CR>
+map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
+map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
+map <silent> <LocalLeader>vx :wa<CR> :VimuxClosePanes<CR>
+map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
+vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
+nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
+map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
 
 " Distraction-free writing
 Plug 'junegunn/goyo.vim'
+let g:goyo_width = 100
 Plug 'junegunn/limelight.vim'
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
@@ -32,8 +51,16 @@ Plug 'hashivim/vim-terraform'
 " Colors
 Plug 'morhetz/gruvbox'
 Plug 'ajh17/Spacegray.vim'
-Plug 'cormacrelf/vim-colors-github'
+" Plug 'cormacrelf/vim-colors-github'
+" Plug 'endel/vim-github-colorscheme'
+Plug 'victorze/foo'
+Plug 'yasukotelin/shirotelin'
+Plug 'nightsense/cosmic_latte'
 " Plug 'felixhummel/setcolors.vim'
+
+" Misc tools
+Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<C-Z>'
 
 " Investigate these
 Plug 'benmills/vim-commadown'
@@ -42,7 +69,6 @@ Plug 'ddrscott/vim-side-search'
 Plug 'henrik/vim-indexed-search'
 Plug 'kana/vim-textobj-user'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
@@ -66,6 +92,7 @@ if v:version >= 801 || has('nvim')
   Plug 'w0rp/ale'
   Plug 'maralla/completor.vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+  nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
   Plug 'RRethy/vim-illuminate'
 endif
 

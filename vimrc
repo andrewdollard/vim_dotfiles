@@ -24,6 +24,7 @@ set clipboard=unnamed
 " ========= Options ========
 
 colorscheme gruvbox
+" let mapleader = ","
 
 compiler ruby
 syntax on
@@ -48,8 +49,8 @@ set linebreak
 set backupcopy=yes " Setting backup copy preserves file inodes, which are needed for Docker file mounting
 " set signcolumn=yes
 set complete-=t " Don't use tags for autocomplete
-set textwidth=80
-:set colorcolumn=-0
+set textwidth=100
+:set colorcolumn=+1
 
 if version >= 703
   set undodir=~/.vim/undodir
@@ -58,20 +59,25 @@ if version >= 703
 endif
 set undolevels=1000 "maximum number of changes that can be undone
 
+" Markdown
 autocmd FileType markdown normal zR
+autocmd FileType markdown setlocal formatoptions+=an " automatically reformat paragraphs, but not lists
+autocmd FileType markdown :IlluminationDisable " disable Illumination plugin for markdown
+autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
+autocmd FileType markdown setlocal formatoptions+=tcqln formatoptions-=r formatoptions-=o
+autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+" hi! Alert ctermbg=red guibg=red
+" autocmd FileType markdown Syntax match Alert /QUESTION/
+" autocmd FileType markdown Syntax syn match Alert /CHECKTHIS/
+
 
 " File Types
-
-autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType cs setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType javascript setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType python runtime python_mappings.vim
 
-autocmd FileType tex setlocal textwidth=78
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
-autocmd FileType ruby runtime ruby_mappings.vim
-autocmd FileType python runtime python_mappings.vim
 
 " if version >= 700
 "     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
@@ -191,17 +197,6 @@ let g:completor_auto_trigger = 0
 
 " ========= Shortcuts ========
 
-" NERDTree
-map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
-map <silent> <LocalLeader>nr :NERDTree<CR>
-map <silent> <LocalLeader>nf :NERDTreeFind<CR>
-
-" FZF
-map <silent> <leader>ff :Files<CR>
-map <silent> <leader>fg :GFiles<CR>
-map <silent> <leader>fb :Buffers<CR>
-map <silent> <leader>ft :Tags<CR>
-
 map <silent> <C-p> :Files<CR>
 
 " Ack
@@ -211,15 +206,6 @@ map <LocalLeader>aw :Ack '<C-R><C-W>'
 map <silent> <LocalLeader>cc :TComment<CR>
 map <silent> <LocalLeader>uc :TComment<CR>
 
-" Vimux
-map <silent> <LocalLeader>rl :wa<CR> :VimuxRunLastCommand<CR>
-map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
-map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
-map <silent> <LocalLeader>vx :wa<CR> :VimuxClosePanes<CR>
-map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
-vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
-nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
-map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
 
 map <silent> <LocalLeader>cj :!clj %<CR>
