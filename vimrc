@@ -1,6 +1,5 @@
-
 " ========= Setup ========
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set mouse=a
 
 set nocompatible
@@ -13,13 +12,6 @@ endif
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
-
-if filereadable(expand("/etc/vim/vimrc.bundles"))
-  source /etc/vim/vimrc.bundles
-endif
-
-" Put yanked values on Mac system clipboard
-set clipboard=unnamed
 
 " ========= Options ========
 
@@ -53,12 +45,9 @@ set textwidth=100
 set colorcolumn=+1
 autocmd VimResized * wincmd =
 
-if version >= 703
-  set undodir=~/.vim/undodir
-  set undofile
-  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-endif
-set undolevels=1000 "maximum number of changes that can be undone
+set undodir=~/.vim/undodir
+set undofile
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 " Markdown
 autocmd FileType markdown normal zR
@@ -102,9 +91,6 @@ autocmd FileType c,cpp,elixir,eruby,html,java,javascript,md,php,ruby autocmd Buf
 " highlight ExtraWhitespace ctermbg=red guibg=red
 " autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
-" Run terraform fmt on terraform files
-autocmd BufWritePre *.tf call terraform#fmt()
-
 " Status
 set laststatus=2
 set statusline=
@@ -128,19 +114,9 @@ let g:gist_detect_filetype = 1
 
 let g:no_html_toolbar = 'yes'
 let g:netrw_banner = 0
-let g:auto_save = 1
 let g:completor_auto_trigger = 0
 
 " ========= Shortcuts ========
-
-map <silent> <C-p> :Files<CR>
-
-" Ack
-map <LocalLeader>aw :Ack '<C-R><C-W>'
-
-" TComment
-map <silent> <LocalLeader>cc :TComment<CR>
-map <silent> <LocalLeader>uc :TComment<CR>
 
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj<CR>
 

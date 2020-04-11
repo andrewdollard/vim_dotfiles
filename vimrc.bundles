@@ -6,9 +6,10 @@ call plug#begin('~/.vim/plugged')
 
 " Core tools
 Plug 'jlanzarotta/bufexplorer'
-Plug '907th/vim-auto-save'
 Plug 'Townk/vim-autoclose' " automatically closes parens, braces, etc. 
 
+Plug '907th/vim-auto-save'
+let g:auto_save = 1
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -19,11 +20,11 @@ map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
-
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 map <silent> <leader>ff :Files<CR>
+map <silent> <C-p> :Files<CR>
 map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
@@ -35,7 +36,6 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-
 
 " Vimux
 Plug 'benmills/vimux'
@@ -67,14 +67,18 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color'
 Plug 'pangloss/vim-javascript' ", { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
 Plug 'mxw/vim-jsx'
+
 Plug 'hashivim/vim-terraform'
+autocmd BufWritePre *.tf call terraform#fmt()
 
 " Colors
 Plug 'morhetz/gruvbox'
 Plug 'ajh17/Spacegray.vim'
-Plug 'victorze/foo'
-Plug 'yasukotelin/shirotelin'
+" Plug 'victorze/foo'
 Plug 'nightsense/cosmic_latte'
+Plug 'andbar-ru/vim-unicon'
+Plug 'endel/vim-github-colorscheme'
+
 " Plug 'felixhummel/setcolors.vim'
 " Plug 'cormacrelf/vim-colors-github'
 " Plug 'endel/vim-github-colorscheme'
@@ -113,10 +117,14 @@ if exists(':RainbowParenthesesToggle')
 endif
 
 Plug 'mileszs/ack.vim'
+map <LocalLeader>aw :Ack '<C-R><C-W>'
 let g:AckAllFiles = 0
 let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
 
 Plug 'tomtom/tcomment_vim'
+map <silent> <LocalLeader>cc :TComment<CR>
+map <silent> <LocalLeader>uc :TComment<CR>
+
 Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-classpath'
 " Plug 'tpope/vim-endwise'
