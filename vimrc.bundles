@@ -6,20 +6,40 @@ call plug#begin('~/.vim/plugged')
 
 " Core tools
 Plug 'jlanzarotta/bufexplorer'
+Plug '907th/vim-auto-save'
+Plug 'Townk/vim-autoclose' " automatically closes parens, braces, etc. 
 
+
+" NERDTree
 Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore=['\.pyc$', '\.o$', '\.class$', '\.lo$']
+let NERDTreeHijackNetrw = 0
+let NERDTreeCaseSensitiveSort = 1
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
+
+" FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 map <silent> <leader>ff :Files<CR>
 map <silent> <leader>fg :GFiles<CR>
 map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
+let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps/|_build/|node_modules/|vendor/|build_intellij/"' 
+let $FZF_DEFAULT_OPTS = '--reverse'
+let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
+
+" Vimux
 Plug 'benmills/vimux'
+let g:VimuxUseNearestPane = 1
 map <silent> <LocalLeader>rl :wa<CR> :VimuxRunLastCommand<CR>
 map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
 map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
@@ -28,6 +48,7 @@ map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
 vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
+
 
 " Distraction-free writing
 Plug 'junegunn/goyo.vim'
@@ -51,25 +72,50 @@ Plug 'hashivim/vim-terraform'
 " Colors
 Plug 'morhetz/gruvbox'
 Plug 'ajh17/Spacegray.vim'
-" Plug 'cormacrelf/vim-colors-github'
-" Plug 'endel/vim-github-colorscheme'
 Plug 'victorze/foo'
 Plug 'yasukotelin/shirotelin'
 Plug 'nightsense/cosmic_latte'
 " Plug 'felixhummel/setcolors.vim'
+" Plug 'cormacrelf/vim-colors-github'
+" Plug 'endel/vim-github-colorscheme'
 
 " Misc tools
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
 " Investigate these
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/mako.vim'
+Plug 'vim-scripts/matchit.zip'
+Plug 'tmhedberg/SimpylFold'
 Plug 'benmills/vim-commadown'
 Plug 'bkad/CamelCaseMotion'
+
 Plug 'ddrscott/vim-side-search'
+let g:side_search_prg = 'ack-grep --word-regexp'
+       \. " --heading -C 2 --group"
+let g:side_search_splitter = 'vnew'
+let g:side_search_split_pct = 0.4
+" SideSearch current word and return to original window
+nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
+" SS shortcut and return to original window
+ command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
+
 Plug 'henrik/vim-indexed-search'
 Plug 'kana/vim-textobj-user'
+
 Plug 'kien/rainbow_parentheses.vim'
+if exists(':RainbowParenthesesToggle')
+  autocmd VimEnter *       RainbowParenthesesToggle
+  autocmd Syntax   clojure RainbowParenthesesLoadRound
+  autocmd Syntax   clojure RainbowParenthesesLoadSquare
+  autocmd Syntax   clojure RainbowParenthesesLoadBraces
+endif
+
 Plug 'mileszs/ack.vim'
+let g:AckAllFiles = 0
+let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
+
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-classpath'
@@ -81,19 +127,23 @@ Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-unimpaired'
 " Plug 'tpope/vim-vinegar'
 
-Plug 'vim-scripts/Align'
-Plug 'vim-scripts/mako.vim'
-Plug 'vim-scripts/matchit.zip'
-Plug 'Townk/vim-autoclose'
-Plug '907th/vim-auto-save'
-Plug 'tmhedberg/SimpylFold'
 
 if v:version >= 801 || has('nvim')
-  Plug 'w0rp/ale'
-  Plug 'maralla/completor.vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
   nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
   Plug 'RRethy/vim-illuminate'
+
+  " Investigate these
+  Plug 'w0rp/ale'
+  let g:ale_linters = {
+  \   'java': []
+  \ }
+  let g:ale_enabled = 0                     " Disable linting by default
+  let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
+  let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
+
+
+  Plug 'maralla/completor.vim'
 endif
 
 call plug#end()

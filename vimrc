@@ -119,30 +119,6 @@ set statusline+=%P                        " percentage of file
 
 " ========= Plugin Options ========
 
-let g:AckAllFiles = 0
-let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
-
-" Side Search {{{
-let g:side_search_prg = 'ack-grep --word-regexp'
-       \. " --heading -C 2 --group"
-let g:side_search_splitter = 'vnew'
-let g:side_search_split_pct = 0.4
-
-" SideSearch current word and return to original window
-nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
-
-" SS shortcut and return to original window
- command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
-" }}}
-
-let g:ale_enabled = 0                     " Disable linting by default
-let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
-let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
-
-let g:ale_linters = {
-\   'java': []
-\ }
-
 let html_use_css=1
 let html_number_lines=0
 let html_no_pre=1
@@ -150,50 +126,9 @@ let html_no_pre=1
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
-let g:rubycomplete_buffer_loading = 1
-let g:ruby_indent_assignment_style = 'variable'
-
 let g:no_html_toolbar = 'yes'
-
-let coffee_no_trailing_space_error = 1
-
-let NERDTreeIgnore=['\.pyc$', '\.o$', '\.class$', '\.lo$']
-let NERDTreeHijackNetrw = 0
-let NERDTreeCaseSensitiveSort = 1
-
 let g:netrw_banner = 0
-
-let g:VimuxUseNearestPane = 1
-
-let g:rails_projections = {
-      \   "script/*.rb": { 
-      \     "test": "spec/script/{}_spec.rb"
-      \   },
-      \   "spec/script/*_spec.rb": {
-      \     "alternate": "script/{}.rb"
-      \   }
-      \ }
-
-if exists(':RainbowParenthesesToggle')
-  autocmd VimEnter *       RainbowParenthesesToggle
-  autocmd Syntax   clojure RainbowParenthesesLoadRound
-  autocmd Syntax   clojure RainbowParenthesesLoadSquare
-  autocmd Syntax   clojure RainbowParenthesesLoadBraces
-endif
-
-let g:puppet_align_hashes = 0
-
 let g:auto_save = 1
-
-let $FZF_DEFAULT_COMMAND = 'find * -type f 2>/dev/null | grep -v -E "deps/|_build/|node_modules/|vendor/|build_intellij/"' 
-let $FZF_DEFAULT_OPTS = '--reverse'
-let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --langmap=Lisp:+.clj'
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
 let g:completor_auto_trigger = 0
 
 " ========= Shortcuts ========
@@ -239,10 +174,6 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 " Copy text to Mac OS X clipboard
 map <C-x> :!pbcopy<CR>
 map <C-c> :w !pbcopy<CR><CR>
-
-" ========= Insert Shortcuts ========
-
-imap <C-L> <SPACE>=><SPACE>
 
 " ========= Functions ========
 
@@ -296,17 +227,6 @@ function! __Edge()
   let g:VimuxHeight = "40"
 endfunction
 
-function! __HardMode()
-  nmap h <nop>
-  nmap j <nop>
-  nmap k <nop>
-  nmap l <nop>
-  nmap <up> <nop>
-  nmap <down> <nop>
-  nmap <left> <nop>
-  nmap <right> <nop>
-endfunction
-
 " cleans up the way the default tabline looks
 " will show tab numbers next to the basename of the file
 " from :help setting-tabline
@@ -357,15 +277,3 @@ set tabline=%!MyTabLine()
 
 command! W w
 
-"-------- Local Overrides
-""If you have options you'd like to override locally for
-"some reason (don't want to store something in a
-""publicly-accessible repository, machine-specific settings, etc.),
-"you can create a '.local_vimrc' file in your home directory
-""(ie: ~/.vimrc_local) and it will be 'sourced' here and override
-"any settings in this file.
-""
-"NOTE: YOU MAY NOT WANT TO ADD ANY LINES BELOW THIS
-if filereadable(expand('~/.vimrc_local'))
-  source ~/.vimrc_local
-end
