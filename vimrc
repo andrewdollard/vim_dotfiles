@@ -50,7 +50,8 @@ set backupcopy=yes " Setting backup copy preserves file inodes, which are needed
 " set signcolumn=yes
 set complete-=t " Don't use tags for autocomplete
 set textwidth=100
-:set colorcolumn=+1
+set colorcolumn=+1
+autocmd VimResized * wincmd =
 
 if version >= 703
   set undodir=~/.vim/undodir
