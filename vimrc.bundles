@@ -73,12 +73,8 @@ autocmd BufWritePre *.tf call terraform#fmt()
 
 " Colors
 Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'ajh17/Spacegray.vim'
-" Plug 'victorze/foo'
-Plug 'nightsense/cosmic_latte'
-Plug 'andbar-ru/vim-unicon'
-Plug 'endel/vim-github-colorscheme'
-
 " Plug 'felixhummel/setcolors.vim'
 " Plug 'cormacrelf/vim-colors-github'
 " Plug 'endel/vim-github-colorscheme'

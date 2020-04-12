@@ -15,6 +15,7 @@ endif
 
 " ========= Options ========
 
+let g:gruvbox_italic=1
 colorscheme gruvbox
 " let mapleader = ","
 
@@ -56,6 +57,7 @@ autocmd FileType markdown :IlluminationDisable " disable Illumination plugin for
 autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
 autocmd FileType markdown setlocal formatoptions+=tcqln formatoptions-=r formatoptions-=o
 autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+
 " hi! Alert ctermbg=red guibg=red
 " autocmd FileType markdown Syntax match Alert /QUESTION/
 " autocmd FileType markdown Syntax syn match Alert /CHECKTHIS/
