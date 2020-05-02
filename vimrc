@@ -64,8 +64,6 @@ autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\
 
 
 " File Types
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType javascript setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType python runtime python_mappings.vim
 
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78

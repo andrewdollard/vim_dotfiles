@@ -5,6 +5,7 @@ end
 call plug#begin('~/.vim/plugged')
 
 " Core tools
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jlanzarotta/bufexplorer'
 Plug 'Townk/vim-autoclose' " automatically closes parens, braces, etc. 
 
@@ -56,17 +57,21 @@ let g:goyo_width = 100
 Plug 'junegunn/limelight.vim'
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
+Plug 'RRethy/vim-illuminate'
+
+" Syntaxes
+Plug 'sheerun/vim-polyglot'
+Plug 'ap/vim-css-color'
+" Plug 'pangloss/vim-javascript' ", { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
+" Plug 'mxw/vim-jsx'
 
 " Markdown
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular' "| Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
 " Plug 'jtratner/vim-flavored-markdown'
 " Plug 'mzlogin/vim-markdown-toc'
 " Plug 'prashanthellina/follow-markdown-links'
-
-" Syntaxes
-Plug 'ap/vim-css-color'
-Plug 'pangloss/vim-javascript' ", { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
-Plug 'mxw/vim-jsx'
 
 Plug 'hashivim/vim-terraform'
 autocmd BufWritePre *.tf call terraform#fmt()
@@ -76,12 +81,12 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'ajh17/Spacegray.vim'
 " Plug 'felixhummel/setcolors.vim'
-" Plug 'cormacrelf/vim-colors-github'
+Plug 'cormacrelf/vim-colors-github'
 " Plug 'endel/vim-github-colorscheme'
 
 " Misc tools
 Plug 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<C-Z>'
+" let g:user_emmet_leader_key='<C-Z>'
 
 " Investigate these
 Plug 'vim-scripts/Align'
@@ -99,7 +104,7 @@ let g:side_search_split_pct = 0.4
 " SideSearch current word and return to original window
 nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
 " SS shortcut and return to original window
- command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
+command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 
 Plug 'henrik/vim-indexed-search'
 Plug 'kana/vim-textobj-user'
@@ -130,24 +135,14 @@ Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-unimpaired'
 " Plug 'tpope/vim-vinegar'
+Plug 'w0rp/ale'
+let g:ale_linters = {
+\   'java': []
+\ }
+let g:ale_enabled = 0                     " Disable linting by default
+let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
+let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
+Plug 'maralla/completor.vim'
 
-
-if v:version >= 801 || has('nvim')
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-  nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
-  Plug 'RRethy/vim-illuminate'
-
-  " Investigate these
-  Plug 'w0rp/ale'
-  let g:ale_linters = {
-  \   'java': []
-  \ }
-  let g:ale_enabled = 0                     " Disable linting by default
-  let g:ale_lint_on_text_changed = 'normal' " Only lint while in normal mode
-  let g:ale_lint_on_insert_leave = 1        " Automatically lint when leaving insert mode
-
-
-  Plug 'maralla/completor.vim'
-endif
 
 call plug#end()
