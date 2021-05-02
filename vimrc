@@ -52,11 +52,13 @@ set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 " Markdown
 autocmd FileType markdown normal zR
-autocmd FileType markdown setlocal formatoptions+=an " automatically reformat paragraphs, but not lists
+" autocmd FileType markdown setlocal formatoptions+=an " automatically reformat paragraphs, but not lists
 autocmd FileType markdown :IlluminationDisable " disable Illumination plugin for markdown
 autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=<!--%s-->
-autocmd FileType markdown setlocal formatoptions+=tcqln formatoptions-=r formatoptions-=o
+autocmd FileType markdown setlocal formatoptions+=tcqln "formatoptions-=r formatoptions-=o
 autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+autocmd Filetype markdown set formatoptions+=ro
+autocmd Filetype markdown set comments=b:*,b:-,b:+,b:1.,n:>
 
 " hi! Alert ctermbg=red guibg=red
 " autocmd FileType markdown Syntax match Alert /QUESTION/
@@ -68,6 +70,9 @@ autocmd FileType python runtime python_mappings.vim
 
 autocmd BufNewFile,BufRead *.txt setlocal textwidth=78
 
+hi clear SpellBad
+hi SpellBad cterm=underline
+hi SpellBad gui=undercurl
 
 " if version >= 700
 "     autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
