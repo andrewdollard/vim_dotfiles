@@ -9,6 +9,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'Townk/vim-autoclose' " automatically closes parens, braces, etc. 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
+Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug '907th/vim-auto-save'
 let g:auto_save = 1
 
