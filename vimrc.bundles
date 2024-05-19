@@ -4,6 +4,8 @@ end
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'ekalinin/dockerfile.vim'
+
 " Core tools
 Plug 'jlanzarotta/bufexplorer'
 Plug 'Townk/vim-autoclose' " automatically closes parens, braces, etc. 
@@ -51,6 +53,8 @@ vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
 nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 map <silent> <LocalLeader>ds :call VimuxRunCommand('clear; grep -E "^ *describe[ \(]\|^ *context[ \(]\|^ *it[ \(]" ' . bufname("%"))<CR>
 
+" Python
+Plug 'vim-scripts/indentpython.vim'
 
 " Distraction-free writing
 Plug 'junegunn/goyo.vim'
@@ -63,6 +67,7 @@ Plug 'RRethy/vim-illuminate'
 " Syntaxes
 Plug 'sheerun/vim-polyglot'
 Plug 'ap/vim-css-color'
+Plug 'nikvdp/ejs-syntax'
 " Plug 'pangloss/vim-javascript' ", { 'commit': 'ce0f529bbb938b42f757aeedbe8f5d95f095b51d' }
 " Plug 'mxw/vim-jsx'
 

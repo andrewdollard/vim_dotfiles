@@ -1,2 +1,7 @@
-map <silent> <LocalLeader>rb :wa<CR> :RunNoseTestBuffer<CR>
-map <silent> <LocalLeader>rf :wa<CR> :RunNoseTestFocused<CR>
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=79
+set expandtab
+set autoindent
+set fileformat=unix
